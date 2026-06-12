@@ -44,7 +44,10 @@ img {
   --bg-1: rgba(0, 0, 0, 0.55);
   --bg-2: rgba(0, 0, 0, 0.65);
   --bg-3: rgba(0, 0, 0, 0.6);
-  --section-pad: 64px 100px;
+  --section-pad-x: 150px;
+  --section-pad-y: 72px;
+  --section-pad: var(--section-pad-y) var(--section-pad-x);
+  --hero-pad-y: 25vh;
 }
 
 /* ─── Navigation ─────────────────────────────────── */
@@ -66,6 +69,7 @@ img {
   border: 0.5px solid rgba(255, 255, 255, 0.14);
   border-radius: 40px;
   padding: 6px 8px;
+  background: rgba(0, 0, 0, 0.3);
 }
 
 .nav-pill a {
@@ -90,7 +94,7 @@ img {
 /* ─── Hero ───────────────────────────────────────── */
 #about {
   background: var(--bg-0);
-  padding: var(--section-pad);
+  padding: var(--hero-pad-y) var(--section-pad-x);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -144,31 +148,30 @@ img {
 .hero-image {
   flex-shrink: 0;
   width: 280px;
-  height: 380px;
-  border-radius: 12px;
   overflow: hidden;
   margin-right: 40px;
 }
 
 .hero-image img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
+  height: auto;
+  display: block;
 }
 
 /* ─── Photo Strip ────────────────────────────────── */
 .photo-strip {
   width: 100%;
   height: auto;
-  border-top: 0.5px solid var(--border);
-  border-bottom: 0.5px solid var(--border);
+  padding-top: var(--section-pad-y);
+  padding-bottom: var(--section-pad-y);
 }
 
 .photo-strip img {
-  width: 100%;
+  width: calc(100% - 2 * var(--section-pad-x));
   height: auto;
   object-fit: initial;
+  display: block;
+  margin: 0 auto;
 }
 
 /* ─── Section base ───────────────────────────────── */
@@ -552,7 +555,7 @@ img {
 
   .hero-image {
     width: 100%;
-    height: 220px;
+    height: auto;
     margin-right: 0;
   }
 
