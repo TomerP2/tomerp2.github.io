@@ -25,7 +25,7 @@
 
     body {
       font-family: 'Inter Tight', sans-serif;
-      background: #000;
+      background: transparent;
       color: #fff;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
@@ -52,10 +52,10 @@
       --muted: rgba(255, 255, 255, 0.32);
       --border: rgba(255, 255, 255, 0.07);
       --border-blue: rgba(67, 129, 193, 0.3);
-      --bg-0: #000000;
-      --bg-1: #080808;
-      --bg-2: #0d0d0d;
-      --bg-3: #030303;
+      --bg-0: transparent;
+      --bg-1: rgba(0, 0, 0, 0.55);
+      --bg-2: rgba(0, 0, 0, 0.65);
+      --bg-3: rgba(0, 0, 0, 0.6);
       --section-pad: 64px 80px;
     }
 
@@ -102,16 +102,18 @@
 
     /* ─── Hero ───────────────────────────────────────── */
     #about {
-      background: var(--bg-0);
+      background: transparent;
       padding: var(--section-pad);
       display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: space-between;
+      gap: 60px;
       min-height: 70vh;
     }
 
     .hero-left {
-      max-width: 620px;
+      flex: 1;
+      max-width: 560px;
     }
 
     .hero-tag {
@@ -144,18 +146,30 @@
       margin-bottom: 32px;
     }
 
-    .hero-left {
-      text-align: center;
-    }
-
     .hero-bio {
       font-size: 15px;
       color: var(--off-white);
       line-height: 1.75;
-      border-left: none;
-      padding-left: 0;
+      border-left: 2px solid var(--blue-mid);
+      padding-left: 16px;
       max-width: 480px;
-      margin: 0 auto;
+    }
+
+    .hero-image {
+      flex-shrink: 0;
+      width: 280px;
+      height: 380px;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-right: 40px;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 20%;
+      filter: grayscale(20%);
     }
 
     .hero-photo {
@@ -576,9 +590,10 @@
         align-items: flex-start;
       }
 
-      .hero-photo {
+      .hero-image {
         width: 100%;
         height: 220px;
+        margin-right: 0;
       }
 
       .skills-grid {
@@ -618,6 +633,9 @@
 
 <body>
 
+  <!-- ─── Gradient background ─────────────────────────── -->
+  <canvas id="gradient" style="position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;"></canvas>
+
   <!-- ─── Navigation ──────────────────────────────────── -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-pill">
@@ -643,6 +661,9 @@
         science (BSc &amp; MSc), with hands-on experience as a GIS specialist across
         internships and full-time work.
       </p>
+    </div>
+    <div class="hero-image reveal">
+      <img src="img/image_of_me.jpeg" alt="Tomer Peled playing guitar" />
     </div>
   </section>
 
@@ -1009,6 +1030,51 @@
         // window.location.href = card.dataset.href;
         console.log('Navigate to:', card.dataset.href);
       });
+    });
+  </script>
+
+  <!-- ─── Animated gradient background ───────────────── -->
+  <script type="module">
+    import { NeatGradient } from 'https://esm.sh/@firecms/neat';
+
+    const gradient = new NeatGradient({
+      ref: document.getElementById('gradient'),
+      colors: [
+        { color: '#000000', enabled: true },
+        { color: '#000000', enabled: true },
+        { color: '#000000', enabled: true },
+        { color: '#000000', enabled: true },
+        { color: '#000000', enabled: true },
+        { color: '#2A5A9E', enabled: true },
+      ],
+      speed: 2.5,
+      horizontalPressure: 3,
+      verticalPressure: 4,
+      waveFrequencyX: 2,
+      waveFrequencyY: 3,
+      waveAmplitude: 5,
+      shadows: 1,
+      highlights: 5,
+      colorBrightness: 1,
+      colorSaturation: 7,
+      wireframe: false,
+      colorBlending: 8,
+      backgroundColor: '#003FFF',
+      backgroundAlpha: 1,
+      grainScale: 0,
+      grainSparsity: 0,
+      grainIntensity: 0,
+      grainSpeed: 1,
+      resolution: 1,
+      flowDistortionA: 3.7,
+      flowDistortionB: 1.4,
+      flowScale: 2.9,
+      flowEase: 0.32,
+      flowEnabled: true,
+    });
+
+    window.addEventListener('scroll', () => {
+      gradient.yOffset = window.scrollY;
     });
   </script>
 </body>
