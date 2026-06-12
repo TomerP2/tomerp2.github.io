@@ -1,0 +1,1016 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tomer Peled — Geospatial Data Scientist</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@300;400;600;800;900&display=swap"
+    rel="stylesheet" />
+  <style>
+    /* ─── Reset ─────────────────────────────────────── */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Inter Tight', sans-serif;
+      background: #000;
+      color: #fff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ─── CSS Variables ──────────────────────────────── */
+    :root {
+      --blue-light: #6699CC;
+      --blue-mid: #4381C1;
+      --blue-dark: #2a5a9e;
+      --red: #B60109;
+      --white: #ffffff;
+      --off-white: rgba(255, 255, 255, 0.55);
+      --muted: rgba(255, 255, 255, 0.32);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-blue: rgba(67, 129, 193, 0.3);
+      --bg-0: #000000;
+      --bg-1: #080808;
+      --bg-2: #0d0d0d;
+      --bg-3: #030303;
+      --section-pad: 64px 80px;
+    }
+
+    /* ─── Navigation ─────────────────────────────────── */
+    #nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding: 16px 0;
+      background: transparent;
+    }
+
+    .nav-pill {
+      display: flex;
+      gap: 4px;
+      background: rgba(10, 10, 10, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 0.5px solid rgba(255, 255, 255, 0.14);
+      border-radius: 40px;
+      padding: 6px 8px;
+    }
+
+    .nav-pill a {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      letter-spacing: 0.04em;
+      padding: 5px 16px;
+      border-radius: 30px;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .nav-pill a:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .nav-pill a.active {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* ─── Hero ───────────────────────────────────────── */
+    #about {
+      background: var(--bg-0);
+      padding: var(--section-pad);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 70vh;
+    }
+
+    .hero-left {
+      max-width: 620px;
+    }
+
+    .hero-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+
+    .hero-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--blue-mid);
+      flex-shrink: 0;
+    }
+
+    .hero-tag span {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: rgba(255, 255, 255, 0.4);
+      text-transform: uppercase;
+    }
+
+    .hero-name {
+      font-size: clamp(56px, 8vw, 96px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.03em;
+      margin-bottom: 32px;
+    }
+
+    .hero-left {
+      text-align: center;
+    }
+
+    .hero-bio {
+      font-size: 15px;
+      color: var(--off-white);
+      line-height: 1.75;
+      border-left: none;
+      padding-left: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .hero-photo {
+      width: 200px;
+      height: 260px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+      border: 0.5px solid var(--border);
+    }
+
+    .hero-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      filter: grayscale(20%);
+    }
+
+    /* ─── Photo Strip ────────────────────────────────── */
+    .photo-strip {
+      width: 100%;
+      height: auto;
+
+      border-top: 0.5px solid var(--border);
+      border-bottom: 0.5px solid var(--border);
+    }
+
+    .photo-strip img {
+      width: 100%;
+      height: auto;
+      object-fit: initial;
+    }
+
+    /* ─── Section base ───────────────────────────────── */
+    .section {
+      padding: var(--section-pad);
+    }
+
+    .section-alt {
+      background: var(--bg-1);
+    }
+
+    .section-dark {
+      background: var(--bg-2);
+    }
+
+    .section-label {
+      font-size: 9px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.22);
+      margin-bottom: 40px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 0.5px;
+      background: var(--border);
+    }
+
+    /* ─── Timeline ───────────────────────────────────── */
+    .timeline {
+      position: relative;
+      padding-left: 32px;
+      max-width: 700px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 8px;
+      top: 8px;
+      bottom: 0;
+      width: 1px;
+      background: rgba(67, 129, 193, 0.3);
+    }
+
+    .tl-item {
+      position: relative;
+      margin-bottom: 32px;
+    }
+
+    .tl-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -26px;
+      top: 5px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--blue-mid);
+      box-shadow: 0 0 0 4px rgba(67, 129, 193, 0.15);
+    }
+
+    .tl-date {
+      font-size: 10px;
+      color: var(--blue-light);
+      letter-spacing: 0.1em;
+      margin-bottom: 4px;
+    }
+
+    .tl-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 3px;
+    }
+
+    .tl-org {
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .tl-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9px;
+      background: rgba(67, 129, 193, 0.1);
+      color: var(--blue-light);
+      border: 0.5px solid var(--border-blue);
+      border-radius: 20px;
+      padding: 3px 10px;
+      margin-top: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── Skills ─────────────────────────────────────── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .skill-card {
+      background: rgba(255, 255, 255, 0.025);
+      border: 0.5px solid var(--border);
+      border-radius: 10px;
+      padding: 20px 18px;
+      transition: border-color 0.2s;
+    }
+
+    .skill-card:hover {
+      border-color: rgba(67, 129, 193, 0.4);
+    }
+
+    .skill-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+      color: var(--blue-light);
+    }
+
+    .skill-name {
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 5px;
+    }
+
+    .skill-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .skills-subsection {
+      margin-bottom: 40px;
+    }
+
+    .skills-subsection:last-child {
+      margin-bottom: 0;
+    }
+
+    .skills-sublabel {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.2);
+      margin-bottom: 16px;
+    }
+
+    .skills-other {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .skill-chip {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.5);
+      border: 0.5px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 14px;
+    }
+
+    .skill-chip.blue {
+      color: var(--blue-light);
+      border-color: var(--border-blue);
+      background: rgba(67, 129, 193, 0.06);
+    }
+
+    /* ─── Projects ───────────────────────────────────── */
+    .projects-scroll-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      padding-bottom: 4px;
+    }
+
+    .projects-scroll-wrapper::-webkit-scrollbar {
+      display: none;
+    }
+
+    .projects-row {
+      display: flex;
+      gap: 40px;
+      min-width: max-content;
+    }
+
+    .project-card {
+      position: relative;
+      width: 221px;
+      height: 320px;
+      overflow: hidden;
+      cursor: pointer;
+      flex-shrink: 0;
+      background: #161616;
+    }
+
+    .project-card:first-child {
+      border-radius: 0;
+    }
+
+    .project-card:last-child {
+      border-radius: 0;
+    }
+
+    .project-card-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+      filter: brightness(0.6) grayscale(30%);
+    }
+
+    .project-card:hover .project-card-img {
+      transform: scale(1.04);
+    }
+
+    .project-card-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 16px 18px;
+      min-height: 110px;
+    }
+
+    .project-card:hover .project-card-overlay {
+      background: rgba(0, 0, 0, 0.75);
+    }
+
+    .project-tag {
+      font-size: 9px;
+      color: rgba(255, 255, 255, 0.45);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .project-row {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .project-title {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .project-arrow {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--blue-mid);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover .project-arrow {
+      background: var(--blue-light);
+      transform: translateX(2px);
+    }
+
+    .project-arrow svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: #fff;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .projects-hint {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* ─── Contact ────────────────────────────────────── */
+    #contact {
+      background: var(--bg-3);
+      padding: 48px 80px;
+      border-top: 1px solid rgba(67, 129, 193, 0.25);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.38);
+      transition: color 0.2s;
+    }
+
+    .contact-link:hover {
+      color: var(--blue-light);
+    }
+
+    .contact-link svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--blue-mid);
+      fill: none;
+      stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      flex-shrink: 0;
+    }
+
+    .cv-btn {
+      background: var(--blue-mid);
+      color: #fff;
+      font-family: 'Inter Tight', sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      padding: 11px 24px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .cv-btn:hover {
+      background: var(--blue-dark);
+    }
+
+    /* ─── Scroll-reveal ──────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+
+    /* ─── Responsive ─────────────────────────────────── */
+    @media (max-width: 860px) {
+      :root {
+        --section-pad: 48px 32px;
+      }
+
+      #about {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+      }
+
+      .hero-photo {
+        width: 100%;
+        height: 220px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      #contact {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-links {
+        gap: 20px;
+      }
+    }
+
+    @media (max-width: 560px) {
+      :root {
+        --section-pad: 40px 20px;
+      }
+
+      .nav-pill {
+        gap: 0;
+      }
+
+      .nav-pill a {
+        padding: 5px 10px;
+        font-size: 11px;
+      }
+
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ─── Navigation ──────────────────────────────────── -->
+  <nav id="nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-pill">
+      <a href="#about" class="active">About</a>
+      <a href="#experience">Experience</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ─── Hero / About ────────────────────────────────── -->
+  <section id="about">
+    <div class="hero-left reveal">
+      <div class="hero-tag">
+        <div class="hero-dot"></div>
+        <span>Geospatial Data Scientist</span>
+      </div>
+      <h1 class="hero-name">TOMER<br>PELED</h1>
+      <p class="hero-bio">
+        I'm Tomer. A starting geospatial data scientist with an interest in combining
+        remote sensing data and deep learning methods. Educated in geo-information
+        science (BSc &amp; MSc), with hands-on experience as a GIS specialist across
+        internships and full-time work.
+      </p>
+    </div>
+  </section>
+
+  <!-- ─── Full-bleed photo strip ──────────────────────── -->
+  <div class="photo-strip">
+    <img src="img/iceberg.jpg" alt="" />
+  </div>
+
+  <!-- ─── Experience / Timeline ───────────────────────── -->
+  <section id="experience" class="section section-alt">
+    <div class="section-label">Experience &amp; Education</div>
+    <div class="timeline">
+
+      <!-- Data objects — edit here to add/change entries -->
+      <div class="tl-item reveal">
+        <div class="tl-date">Sep 2025 – Present</div>
+        <div class="tl-title">MSc Geo-Information Science</div>
+        <div class="tl-org">Wageningen University &amp; Research</div>
+        <div class="tl-badge">★ Grade avg 8.7</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Mar 2025 – Apr 2026</div>
+        <div class="tl-title">GIS Specialist</div>
+        <div class="tl-org">Movares</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Feb 2024 – Jul 2024</div>
+        <div class="tl-title">Thesis: Point Cloud Segmentation</div>
+        <div class="tl-org">Van Oord / HAS University</div>
+        <div class="tl-badge">🏆 2nd Place GIN-NCG Scriptieprijs 2024</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Jul 2023 – Jan 2024</div>
+        <div class="tl-title">Dashboard Developer</div>
+        <div class="tl-org">BouwRisk</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Feb 2023 – Jul 2023</div>
+        <div class="tl-title">Internship</div>
+        <div class="tl-org">BouwRisk</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">Sep 2022 – Jan 2023</div>
+        <div class="tl-title">Internship</div>
+        <div class="tl-org">GIS Specialisten</div>
+      </div>
+
+      <div class="tl-item reveal">
+        <div class="tl-date">2020 – 2024</div>
+        <div class="tl-title">BSc Applied Geo-Information Science</div>
+        <div class="tl-org">HAS University of Applied Sciences, Den Bosch</div>
+        <div class="tl-badge">★ Grade avg 8.3</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ─── Skills ───────────────────────────────────────── -->
+  <section id="skills" class="section section-dark">
+    <div class="section-label">Skills</div>
+
+    <!-- Technical skills -->
+    <div class="skills-subsection">
+      <div class="skills-sublabel">Technical</div>
+      <div class="skills-grid">
+
+        <!-- Edit skill cards here -->
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6" />
+              <polyline points="8 6 2 12 8 18" />
+            </svg>
+          </div>
+          <div class="skill-name">Python / Jupyter</div>
+          <div class="skill-desc">ML pipelines, geospatial processing, scripting and automation</div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 12 2z" />
+              <path d="M2 12h20" />
+              <path d="M12 2c2.5 3 4 6.5 4 10s-1.5 7-4 10" />
+              <path d="M12 2c-2.5 3-4 6.5-4 10s1.5 7 4 10" />
+            </svg>
+          </div>
+          <div class="skill-name">Remote Sensing</div>
+          <div class="skill-desc">Multispectral, LiDAR, SAR, and hyperspectral data processing</div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path
+                d="M9.5 2A2.5 2.5 0 0 1 12 4.5v15a2.5 2.5 0 0 1-4.96.44 2.5 2.5 0 0 1-2.96-3.08 3 3 0 0 1-.34-5.58 2.5 2.5 0 0 1 1.32-4.24 2.5 2.5 0 0 1 4.44-1.04z" />
+              <path
+                d="M14.5 2A2.5 2.5 0 0 0 12 4.5v15a2.5 2.5 0 0 0 4.96.44 2.5 2.5 0 0 0 2.96-3.08 3 3 0 0 0 .34-5.58 2.5 2.5 0 0 0-1.32-4.24 2.5 2.5 0 0 0-4.44-1.04z" />
+            </svg>
+          </div>
+          <div class="skill-name">Machine / Deep Learning</div>
+          <div class="skill-desc">Point cloud segmentation, image classification models</div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21" />
+              <line x1="9" y1="3" x2="9" y2="18" />
+              <line x1="15" y1="6" x2="15" y2="21" />
+            </svg>
+          </div>
+          <div class="skill-name">ArcGIS / QGIS</div>
+          <div class="skill-desc">Spatial analysis, cartography, FME workflows, ArcPy scripting</div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="2" y1="12" x2="22" y2="12" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+            </svg>
+          </div>
+          <div class="skill-name">Google Earth Engine</div>
+          <div class="skill-desc">Cloud-based large-scale geospatial and satellite analysis</div>
+        </div>
+
+        <div class="skill-card reveal">
+          <div class="skill-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+              stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="3" width="20" height="14" rx="2" />
+              <path d="M8 21h8" />
+              <path d="M12 17v4" />
+            </svg>
+          </div>
+          <div class="skill-name">Web &amp; Dashboards</div>
+          <div class="skill-desc">HTML / CSS / JS, Leaflet, SQL, R, interactive data apps</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Data science skills chips -->
+    <div class="skills-subsection">
+      <div class="skills-sublabel">Data Science</div>
+      <div class="skills-other">
+        <span class="skill-chip blue">Satellite multispectral / hyperspectral</span>
+        <span class="skill-chip blue">LiDAR point clouds</span>
+        <span class="skill-chip blue">Radar / SAR data</span>
+        <span class="skill-chip blue">Deep learning model development</span>
+        <span class="skill-chip blue">Spatial data pipelines</span>
+        <span class="skill-chip blue">Web map design</span>
+      </div>
+    </div>
+
+    <!-- Other -->
+    <div class="skills-subsection">
+      <div class="skills-sublabel">Other</div>
+      <div class="skills-other">
+        <span class="skill-chip">Dutch — native</span>
+        <span class="skill-chip">English — fluent (TOEFL 115/120)</span>
+        <span class="skill-chip">FME Certified Professional</span>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ─── Projects ─────────────────────────────────────── -->
+  <section id="projects" class="section section-alt">
+    <div class="section-label">Projects</div>
+    <div class="projects-scroll-wrapper">
+      <div class="projects-row">
+
+        <!-- Project cards — edit/add here.
+             Set data-href to the project page path when ready. -->
+        <div class="project-card reveal" data-href="projects/point-cloud-segmentation.html" role="article">
+          <img class="project-card-img" src="img/van_oord_project.png" alt="Point Cloud Segmentation" />
+          <div class="project-card-overlay">
+            <div class="project-tag">LiDAR · Deep Learning</div>
+            <div class="project-row">
+              <div class="project-title">Point Cloud<br>Segmentation</div>
+              <div class="project-arrow" aria-label="View project">
+                <svg viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-href="projects/storymap-gis.html" role="article">
+          <img class="project-card-img" src="img/GIS_in_context_project.png" alt="Storymap GIS In Context" />
+          <div class="project-card-overlay">
+            <div class="project-tag">GIS · Storymap</div>
+            <div class="project-row">
+              <div class="project-title">Storymap GIS<br>In Context</div>
+              <div class="project-arrow" aria-label="View project">
+                <svg viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-href="projects/fietsmeister.html" role="article">
+          <img class="project-card-img" src="img/fietsmeister_project.png" alt="Fietsmeister" />
+          <div class="project-card-overlay">
+            <div class="project-tag">Web · Leaflet</div>
+            <div class="project-row">
+              <div class="project-title">Fietsmeister</div>
+              <div class="project-arrow" aria-label="View project">
+                <svg viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-href="projects/wildlife-tower.html" role="article">
+          <img class="project-card-img" src="img/Groenlo_project.png" alt="Groenlo Wildlife Watching Tower" />
+          <div class="project-card-overlay">
+            <div class="project-tag">Remote Sensing · Thermal</div>
+            <div class="project-row">
+              <div class="project-title">Groenlo Wildlife<br>Watching Tower</div>
+              <div class="project-arrow" aria-label="View project">
+                <svg viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-href="projects/digital-twin.html" role="article">
+          <img class="project-card-img" src="img/van_oord_project.png" alt="Digital Twin" />
+          <div class="project-card-overlay">
+            <div class="project-tag">Digital Twin · Movares</div>
+            <div class="project-row">
+              <div class="project-title">Termunterzijldiep<br>Digital Twin</div>
+              <div class="project-arrow" aria-label="View project">
+                <svg viewBox="0 0 24 24">
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                  <polyline points="12 5 19 12 12 19" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <p class="projects-hint">← Scroll to see more projects</p>
+  </section>
+
+  <!-- ─── Contact ──────────────────────────────────────── -->
+  <footer id="contact" role="contentinfo">
+    <div class="contact-links">
+      <a class="contact-link" href="https://linkedin.com/in/tomer-peled" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24">
+          <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+          <rect x="2" y="9" width="4" height="12" />
+          <circle cx="4" cy="4" r="2" />
+        </svg>
+        LinkedIn
+      </a>
+      <a class="contact-link" href="https://github.com/TomerP2" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24">
+          <path
+            d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+        </svg>
+        GitHub
+      </a>
+      <a class="contact-link" href="mailto:tomer.a.peled@gmail.com">
+        <svg viewBox="0 0 24 24">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+          <polyline points="22,6 12,13 2,6" />
+        </svg>
+        tomer.a.peled@gmail.com
+      </a>
+    </div>
+    <button class="cv-btn" onclick="window.open('Tomer_Peled_CV_EN_GIS_Integration_Course.pdf')">
+      Download CV ↓
+    </button>
+  </footer>
+
+  <!-- ─── JavaScript ────────────────────────────────────── -->
+  <script>
+    // ── Scroll-reveal ──────────────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ── Active nav link on scroll ──────────────────────
+    const sections = document.querySelectorAll('section[id], footer[id]');
+    const navLinks = document.querySelectorAll('.nav-pill a');
+    const activateLink = () => {
+      let current = '';
+      sections.forEach(sec => {
+        if (window.scrollY >= sec.offsetTop - 120) current = sec.id;
+      });
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+      });
+    };
+    window.addEventListener('scroll', activateLink, { passive: true });
+
+    // ── Drag-to-scroll on project cards ───────────────
+    (() => {
+      const wrapper = document.querySelector('.projects-scroll-wrapper');
+      let isDown = false, startX, scrollLeft;
+
+      wrapper.addEventListener('mousedown', e => {
+        isDown = true;
+        startX = e.pageX - wrapper.offsetLeft;
+        scrollLeft = wrapper.scrollLeft;
+        wrapper.style.cursor = 'grabbing';
+        e.preventDefault();
+      });
+      document.addEventListener('mouseup', () => {
+        if (!isDown) return;
+        isDown = false;
+        wrapper.style.cursor = 'grab';
+      });
+      document.addEventListener('mousemove', e => {
+        if (!isDown) return;
+        const x = e.pageX - wrapper.offsetLeft;
+        wrapper.scrollLeft = scrollLeft - (x - startX);
+      });
+
+      wrapper.style.cursor = 'grab';
+      wrapper.querySelectorAll('img').forEach(img => img.setAttribute('draggable', 'false'));
+    })();
+
+    // ── Project card click → project page ─────────────
+    document.querySelectorAll('.project-card[data-href]').forEach(card => {
+      card.style.cursor = 'pointer';
+      card.addEventListener('click', () => {
+        // Uncomment when project pages exist:
+        // window.location.href = card.dataset.href;
+        console.log('Navigate to:', card.dataset.href);
+      });
+    });
+  </script>
+</body>
+
+</html>
