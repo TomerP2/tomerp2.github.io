@@ -97,18 +97,19 @@ img {
   padding: var(--hero-pad-y) var(--section-pad-x);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   gap: 60px;
 }
 
 .hero-left {
-  flex: 1;
   max-width: 560px;
+  text-align: center;
 }
 
 .hero-tag {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
   margin-bottom: 24px;
 }
@@ -140,9 +141,8 @@ img {
   font-size: 15px;
   color: var(--off-white);
   line-height: 1.75;
-  border-left: 2px solid var(--blue-mid);
-  padding-left: 16px;
   max-width: 480px;
+  margin: 0 auto;
 }
 
 .hero-image {
