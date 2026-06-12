@@ -37,5 +37,5 @@ const gradient = new NeatGradient({
 });
 
 window.addEventListener('scroll', () => {
-  gradient.yOffset = window.scrollY;
+  gradient.yOffset = window.scrollY * 3;
 });
