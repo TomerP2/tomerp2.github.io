@@ -54,7 +54,13 @@ I'm Tomer. I am a starting geospatial data scientist with an interest in combini
 ## Experiences
 Insert timeline. Base this off my CV. Timeline should be black-and-white with some of the red accent color added.
 
-Timeline inspiration: ![[portfolio/design/attachments/Pasted image 20260609194518.png]]
+## Timeline
+- Base timeline elements off my CV
+- Elements should have icons based on categories: Education, work experience, projects.
+- Try having different colors for each category
+![[Pasted image 20260612180918.png]]
+![[Pasted image 20260612181603.png]]
+
 
 ## Skills
 **Techy skills**
