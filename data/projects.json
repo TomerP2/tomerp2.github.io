@@ -1,0 +1,79 @@
+[
+  {
+    "id": "van-oord-point-cloud",
+    "title": "Automatic Segmentation of Heavy Equipment and Pipes in Point Clouds",
+    "tag": "LiDAR · Deep Learning",
+    "cardImage": "img/van_oord_project.png",
+    "date": "January 2024 – June 2024",
+    "commissioner": "Van Oord N.V.",
+    "skills": ["Deep Learning", "Point Cloud Processing"],
+    "description": [
+      "For my Bachelor Thesis, a fellow student and I created a point cloud object segmentation pipeline for Van Oord N.V.",
+      "The pipeline uses the YOLO deep learning model for automatic segmentation of non-ground objects (pipes and machinery) on construction sites, allowing for quick processing of the point clouds that Van Oord creates regularly."
+    ],
+    "images": [
+      {
+        "src": "img/projects/van-oord/segmentation_result.png",
+        "alt": "Aerial view of a construction site next to the same area with pipes and machinery segmented in red",
+        "caption": "Input orthoimage (left) and segmented pipes and machinery (right)"
+      },
+      {
+        "src": "img/projects/van-oord/pipeline_flowchart.png",
+        "alt": "Flowchart of the point cloud labelling pipeline",
+        "caption": "Flowchart of the YOLO point cloud labelling script"
+      }
+    ],
+    "links": []
+  },
+  {
+    "id": "storymap-gis-in-context",
+    "title": "Storymap GIS In Context",
+    "cardTitle": "Storymap GIS\nIn Context",
+    "tag": "GIS · Storymap",
+    "cardImage": "img/GIS_in_context_project.png",
+    "date": "",
+    "commissioner": "",
+    "skills": [],
+    "description": [],
+    "images": [{ "src": "img/GIS_in_context_project.png", "alt": "Storymap GIS In Context" }],
+    "links": []
+  },
+  {
+    "id": "fietsmeister",
+    "title": "Fietsmeister",
+    "tag": "Web · Leaflet",
+    "cardImage": "img/fietsmeister_project.png",
+    "date": "",
+    "commissioner": "",
+    "skills": [],
+    "description": [],
+    "images": [{ "src": "img/fietsmeister_project.png", "alt": "Fietsmeister" }],
+    "links": []
+  },
+  {
+    "id": "groenlo-wildlife-tower",
+    "title": "Groenlo Wildlife Watching Tower",
+    "cardTitle": "Groenlo Wildlife\nWatching Tower",
+    "tag": "Remote Sensing · Thermal",
+    "cardImage": "img/Groenlo_project.png",
+    "date": "",
+    "commissioner": "",
+    "skills": [],
+    "description": [],
+    "images": [{ "src": "img/Groenlo_project.png", "alt": "Groenlo Wildlife Watching Tower" }],
+    "links": []
+  },
+  {
+    "id": "termunterzijldiep-digital-twin",
+    "title": "Termunterzijldiep Digital Twin",
+    "cardTitle": "Termunterzijldiep\nDigital Twin",
+    "tag": "Digital Twin · Movares",
+    "cardImage": "img/van_oord_project.png",
+    "date": "",
+    "commissioner": "Movares",
+    "skills": [],
+    "description": [],
+    "images": [{ "src": "img/van_oord_project.png", "alt": "Termunterzijldiep Digital Twin" }],
+    "links": []
+  }
+]

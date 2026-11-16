@@ -7,7 +7,9 @@ const observer = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.12 });
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+// Global helper so dynamically created elements (e.g. project cards) can reveal too
+window.observeReveal = el => observer.observe(el);
+document.querySelectorAll('.reveal').forEach(window.observeReveal);
 
 // ── Active nav link on scroll ──────────────────────
 const sections = document.querySelectorAll('section[id], footer[id]');
@@ -32,6 +34,7 @@ window.addEventListener('scroll', activateLink, { passive: true });
     isDown = true;
     startX = e.pageX - wrapper.offsetLeft;
     scrollLeft = wrapper.scrollLeft;
+    wrapper.dataset.dragged = 'false';
     wrapper.style.cursor = 'grabbing';
     e.preventDefault();
   });
@@ -43,19 +46,10 @@ window.addEventListener('scroll', activateLink, { passive: true });
   document.addEventListener('mousemove', e => {
     if (!isDown) return;
     const x = e.pageX - wrapper.offsetLeft;
+    // Mark as a drag (not a click) once the pointer moves more than 5px
+    if (Math.abs(x - startX) > 5) wrapper.dataset.dragged = 'true';
     wrapper.scrollLeft = scrollLeft - (x - startX);
   });
 
   wrapper.style.cursor = 'grab';
-  wrapper.querySelectorAll('img').forEach(img => img.setAttribute('draggable', 'false'));
 })();
-
-// ── Project card click → project page ─────────────
-document.querySelectorAll('.project-card[data-href]').forEach(card => {
-  card.style.cursor = 'pointer';
-  card.addEventListener('click', () => {
-    // Uncomment when project pages exist:
-    // window.location.href = card.dataset.href;
-    console.log('Navigate to:', card.dataset.href);
-  });
-});

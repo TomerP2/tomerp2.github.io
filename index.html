@@ -111,90 +111,8 @@
   <section id="projects" class="section">
     <div class="section-label">Projects</div>
     <div class="projects-scroll-wrapper">
-      <div class="projects-row">
-
-        <!-- Add/edit project cards here. Set data-href when project pages are ready. -->
-        <div class="project-card reveal" data-href="projects/point-cloud-segmentation.html" role="article">
-          <img class="project-card-img" src="img/van_oord_project.png" alt="Point Cloud Segmentation" />
-          <div class="project-card-overlay">
-            <div class="project-tag">LiDAR · Deep Learning</div>
-            <div class="project-row">
-              <div class="project-title">Point Cloud<br>Segmentation</div>
-              <div class="project-arrow" aria-label="View project">
-                <svg viewBox="0 0 24 24">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card reveal" data-href="projects/storymap-gis.html" role="article">
-          <img class="project-card-img" src="img/GIS_in_context_project.png" alt="Storymap GIS In Context" />
-          <div class="project-card-overlay">
-            <div class="project-tag">GIS · Storymap</div>
-            <div class="project-row">
-              <div class="project-title">Storymap GIS<br>In Context</div>
-              <div class="project-arrow" aria-label="View project">
-                <svg viewBox="0 0 24 24">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card reveal" data-href="projects/fietsmeister.html" role="article">
-          <img class="project-card-img" src="img/fietsmeister_project.png" alt="Fietsmeister" />
-          <div class="project-card-overlay">
-            <div class="project-tag">Web · Leaflet</div>
-            <div class="project-row">
-              <div class="project-title">Fietsmeister</div>
-              <div class="project-arrow" aria-label="View project">
-                <svg viewBox="0 0 24 24">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card reveal" data-href="projects/wildlife-tower.html" role="article">
-          <img class="project-card-img" src="img/Groenlo_project.png" alt="Groenlo Wildlife Watching Tower" />
-          <div class="project-card-overlay">
-            <div class="project-tag">Remote Sensing · Thermal</div>
-            <div class="project-row">
-              <div class="project-title">Groenlo Wildlife<br>Watching Tower</div>
-              <div class="project-arrow" aria-label="View project">
-                <svg viewBox="0 0 24 24">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card reveal" data-href="projects/digital-twin.html" role="article">
-          <img class="project-card-img" src="img/van_oord_project.png" alt="Digital Twin" />
-          <div class="project-card-overlay">
-            <div class="project-tag">Digital Twin · Movares</div>
-            <div class="project-row">
-              <div class="project-title">Termunterzijldiep<br>Digital Twin</div>
-              <div class="project-arrow" aria-label="View project">
-                <svg viewBox="0 0 24 24">
-                  <line x1="5" y1="12" x2="19" y2="12" />
-                  <polyline points="12 5 19 12 12 19" />
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
+      <!-- Project cards are generated from data/projects.json by js/projects.js -->
+      <div class="projects-row" id="projects-row"></div>
     </div>
     <p class="projects-hint">← Scroll to see more projects</p>
   </section>
@@ -348,7 +266,72 @@
     </button>
   </footer>
 
+  <!-- ─── Project card template ───────────────────────── -->
+  <!-- Edit card markup here. js/projects.js fills the [data-field] elements from data/projects.json -->
+  <template id="project-card-template">
+    <div class="project-card reveal" role="button" tabindex="0">
+      <img class="project-card-img" data-field="cardImage" src="" alt="" />
+      <div class="project-card-overlay">
+        <div class="project-tag" data-field="tag"></div>
+        <div class="project-row">
+          <div class="project-title" data-field="cardTitle"></div>
+          <div class="project-arrow" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <line x1="5" y1="12" x2="19" y2="12" />
+              <polyline points="12 5 19 12 12 19" />
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <!-- ─── Project popup ───────────────────────────────── -->
+  <!-- Edit popup markup here. Boxes with an empty value are hidden automatically. -->
+  <dialog id="project-modal" class="project-modal" aria-labelledby="pm-title">
+    <div class="pm-inner">
+      <button class="pm-close" type="button" data-action="close" aria-label="Close project">×</button>
+
+      <!-- Left column: project info -->
+      <div class="pm-info">
+        <h2 class="pm-title" id="pm-title" data-field="title"></h2>
+        <div class="pm-meta">
+          <div class="pm-meta-item" data-box="date">
+            <span class="pm-label">Date</span>
+            <span data-field="date"></span>
+          </div>
+          <div class="pm-meta-item" data-box="commissioner">
+            <span class="pm-label">Commissioner</span>
+            <span data-field="commissioner"></span>
+          </div>
+        </div>
+        <div class="pm-skills" data-box="skills" data-field="skills"></div>
+        <div class="pm-desc" data-box="description" data-field="description"></div>
+        <div class="pm-links" data-box="links">
+          <span class="pm-label">Links</span>
+          <div class="pm-links-list" data-field="links"></div>
+        </div>
+      </div>
+
+      <!-- Right column: image carousel -->
+      <div class="pm-media">
+        <div class="pm-carousel">
+          <div class="pm-slides" data-field="images"></div>
+          <button class="pm-nav pm-prev" type="button" data-action="prev" aria-label="Previous image">
+            <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6" /></svg>
+          </button>
+          <button class="pm-nav pm-next" type="button" data-action="next" aria-label="Next image">
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6" /></svg>
+          </button>
+        </div>
+        <div class="pm-caption" data-field="caption"></div>
+        <div class="pm-dots" data-field="dots"></div>
+      </div>
+    </div>
+  </dialog>
+
   <script src="js/main.js"></script>
+  <script src="js/projects.js"></script>
   <script type="module" src="js/gradient.js"></script>
 
 </body>
