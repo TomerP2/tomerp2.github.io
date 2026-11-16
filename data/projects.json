@@ -8,14 +8,13 @@
     "commissioner": "Van Oord N.V.",
     "skills": ["Deep Learning", "Point Cloud Processing"],
     "description": [
-      "For my Bachelor Thesis, a fellow student and I created a point cloud object segmentation pipeline for Van Oord N.V.",
-      "The pipeline uses the YOLO deep learning model for automatic segmentation of non-ground objects (pipes and machinery) on construction sites, allowing for quick processing of the point clouds that Van Oord creates regularly."
+      "For my Bachelor Thesis, a fellow student and I created a point cloud object segmentation pipeline for Van Oord. The pipeline uses the YOLO deep learning model for automatic segmentation of non-ground objects (pipes and machinery) on construction sites, allowing for quick processing of the point clouds that Van Oord creates regularly."
     ],
     "images": [
       {
         "src": "img/projects/van-oord/segmentation_result.png",
         "alt": "Aerial view of a construction site next to the same area with pipes and machinery segmented in red",
-        "caption": "Input orthoimage (left) and segmented pipes and machinery (right)"
+        "caption": "Input point cloud (left) and segmented pipes and machinery (right)"
       },
       {
         "src": "img/projects/van-oord/pipeline_flowchart.png",
