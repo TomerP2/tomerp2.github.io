@@ -3,6 +3,7 @@
 // This script only fills in [data-field] elements and toggles [data-box] visibility.
 (() => {
   const DATA_URL = 'data/projects.json';
+  const AUTOPLAY_MS = 5000; // carousel auto-advance interval; stops after manual navigation
 
   const row = document.getElementById('projects-row');
   const wrapper = document.querySelector('.projects-scroll-wrapper');
@@ -45,6 +46,23 @@
   // ── Carousel ──────────────────────────────────────
   let images = [];
   let current = 0;
+  let autoplayTimer = null;
+
+  const stopAutoplay = () => {
+    clearInterval(autoplayTimer);
+    autoplayTimer = null;
+  };
+
+  const startAutoplay = () => {
+    stopAutoplay();
+    if (images.length > 1) autoplayTimer = setInterval(() => showSlide(current + 1), AUTOPLAY_MS);
+  };
+
+  // Manual navigation: go to the slide and stop auto-rotation for this popup
+  const goTo = i => {
+    stopAutoplay();
+    showSlide(i);
+  };
 
   const showSlide = i => {
     if (!images.length) return;
@@ -78,7 +96,7 @@
       dot.type = 'button';
       dot.className = 'pm-dot';
       dot.setAttribute('aria-label', `Show image ${n + 1}`);
-      dot.addEventListener('click', () => showSlide(n));
+      dot.addEventListener('click', () => goTo(n));
       dots.append(dot);
     });
 
@@ -132,24 +150,30 @@
     modal.scrollTop = 0;
     modal.showModal();
     document.body.classList.add('modal-open');
+    startAutoplay();
   };
 
   const closeModal = () => modal.close();
 
-  modal.addEventListener('close', () => document.body.classList.remove('modal-open'));
+  modal.addEventListener('close', () => {
+    // The close event fires async; skip if the popup was already reopened
+    if (modal.open) return;
+    stopAutoplay();
+    document.body.classList.remove('modal-open');
+  });
 
   modal.addEventListener('click', e => {
     // Click on the backdrop (the dialog element itself, outside .pm-inner)
     if (e.target === modal) return closeModal();
     const action = e.target.closest('[data-action]')?.dataset.action;
     if (action === 'close') closeModal();
-    if (action === 'prev') showSlide(current - 1);
-    if (action === 'next') showSlide(current + 1);
+    if (action === 'prev') goTo(current - 1);
+    if (action === 'next') goTo(current + 1);
   });
 
   modal.addEventListener('keydown', e => {
-    if (e.key === 'ArrowLeft') showSlide(current - 1);
-    if (e.key === 'ArrowRight') showSlide(current + 1);
+    if (e.key === 'ArrowLeft') goTo(current - 1);
+    if (e.key === 'ArrowRight') goTo(current + 1);
   });
 
   // ── Load data and wire up card clicks ─────────────
