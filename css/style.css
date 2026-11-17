@@ -838,12 +838,15 @@ body.modal-open {
 /* ─── Responsive ─────────────────────────────────── */
 @media (max-width: 860px) {
   :root {
-    --section-pad: 48px 32px;
+    --section-pad-x: 32px;
+    --section-pad-y: 48px;
+    --hero-pad-y: 14vh;
   }
 
   #about {
     flex-direction: column-reverse;
-    align-items: flex-start;
+    align-items: center;
+    min-height: 70svh;
   }
 
   .hero-image {
@@ -894,7 +897,34 @@ body.modal-open {
 
 @media (max-width: 560px) {
   :root {
-    --section-pad: 40px 20px;
+    --section-pad-x: 20px;
+    --section-pad-y: 40px;
+    --hero-pad-y: 10vh;
+  }
+
+  .hero-name {
+    font-size: clamp(48px, 17vw, 72px);
+    margin-bottom: 24px;
+  }
+
+  .hero-tag {
+    margin-bottom: 18px;
+  }
+
+  .hero-bio {
+    font-size: 14px;
+  }
+
+  /* Photo strip: edge-to-edge on phones, cropped to a pleasant ratio */
+  .photo-strip {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .photo-strip img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
   }
 
   .nav-pill {
