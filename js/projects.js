@@ -25,6 +25,67 @@
 
   const hasValue = v => Array.isArray(v) ? v.length > 0 : Boolean(v);
 
+  // ── GIFs: force infinite looping ──────────────────
+  // Whether a GIF loops is stored in the file itself (the NETSCAPE2.0 block);
+  // without it, or with a finite count, browsers play it only once or a few times.
+  // We fetch the GIF, set the loop count to 0 (= forever) and use a blob URL.
+  const isGif = src => /\.gif($|[?#])/i.test(src);
+  const loopedGifs = new Map(); // src → Promise<url>
+
+  const LOOP_EXT = [0x21, 0xff, 0x0b, ...'NETSCAPE2.0'.split('').map(c => c.charCodeAt(0))];
+
+  const makeGifLoop = bytes => {
+    // Header (6) + logical screen descriptor (7), then the optional global colour table
+    const packed = bytes[10];
+    const gctEnd = 13 + (packed & 0x80 ? 3 * 2 ** ((packed & 0x07) + 1) : 0);
+
+    // Existing loop block → set its loop count to 0
+    outer: for (let i = gctEnd; i < bytes.length - LOOP_EXT.length - 4; i++) {
+      for (let j = 0; j < LOOP_EXT.length; j++) if (bytes[i + j] !== LOOP_EXT[j]) continue outer;
+      const sub = i + LOOP_EXT.length; // sub-block: 0x03 0x01 <lo> <hi> 0x00
+      if (bytes[sub] === 0x03 && bytes[sub + 1] === 0x01) {
+        bytes[sub + 2] = 0;
+        bytes[sub + 3] = 0;
+      }
+      return bytes;
+    }
+
+    // No loop block → insert one right after the global colour table
+    const ext = new Uint8Array([...LOOP_EXT, 0x03, 0x01, 0x00, 0x00, 0x00]);
+    const out = new Uint8Array(bytes.length + ext.length);
+    out.set(bytes.subarray(0, gctEnd));
+    out.set(ext, gctEnd);
+    out.set(bytes.subarray(gctEnd), gctEnd + ext.length);
+    return out;
+  };
+
+  const loopingGifUrl = src => {
+    if (!loopedGifs.has(src)) {
+      loopedGifs.set(src, fetch(src)
+        .then(res => {
+          if (!res.ok) throw new Error(`${res.status} ${res.statusText}`);
+          return res.arrayBuffer();
+        })
+        .then(buf => URL.createObjectURL(new Blob([makeGifLoop(new Uint8Array(buf))], { type: 'image/gif' })))
+        .catch(err => {
+          console.warn(`Could not make ${src} loop:`, err);
+          return src;
+        }));
+    }
+    return loopedGifs.get(src);
+  };
+
+  // Set an <img> source; GIFs are swapped for an infinitely looping copy
+  const setImageSrc = (img, src) => {
+    img.src = src;
+    if (isGif(src)) {
+      loopingGifUrl(src).then(url => {
+        if (img.dataset.src === src) img.src = url; // skip if the img was reused meanwhile
+      });
+    }
+    img.dataset.src = src;
+  };
+
   // ── Cards ─────────────────────────────────────────
   const renderCard = (project, index) => {
     const card = cardTemplate.content.firstElementChild.cloneNode(true);
@@ -32,7 +93,7 @@
     card.setAttribute('aria-label', `Open project: ${project.title}`);
 
     const img = card.querySelector('[data-field="cardImage"]');
-    img.src = project.cardImage;
+    setImageSrc(img, project.cardImage);
     img.alt = project.title;
     img.draggable = false;
 
@@ -87,7 +148,7 @@
     images.forEach((image, n) => {
       const img = document.createElement('img');
       img.className = 'pm-slide';
-      img.src = image.src;
+      setImageSrc(img, image.src);
       img.alt = image.alt || '';
       img.draggable = false;
       slides.append(img);

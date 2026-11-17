@@ -55,11 +55,11 @@ img {
   --modal-padding: 40px;
   --modal-gap: 40px;
   /* space between the two columns */
-  --modal-box-gap: 20px;
+  --modal-box-gap: 0px;
   /* space between boxes in the info column */
   --modal-radius: 12px;
   --modal-bg: #10171f;
-  --modal-panel-bg: rgba(255, 255, 255, 0.04);
+  --modal-panel-bg: rgba(255, 255, 255, 0);
   --modal-panel-radius: 8px;
   --modal-panel-padding: 16px 20px;
   --modal-border: rgba(255, 255, 255, 0.12);
