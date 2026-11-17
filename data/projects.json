@@ -33,7 +33,7 @@
     "title": "Detecting Potential Aviation Obstacles using AHN",
     "cardTitle": "Detecting Aviation\nObstacles using AHN",
     "tag": "LiDAR · Object Detection",
-    "cardImage": "img/projects/aviation-obstacles/pipeline_flowchart.png",
+    "cardImage": "img/projects/aviation-obstacles/ACT-Treetops.png",
     "date": "May 2026 – July 2026",
     "commissioner": "Antea Group, Wageningen University",
     "skills": ["Point Cloud Processing", "Object Detection"],
@@ -50,9 +50,63 @@
         "src": "img/projects/aviation-obstacles/pipeline_flowchart.png",
         "alt": "Flowchart of the building height extraction, tree cluster segmentation and treetop detection pipeline",
         "caption": "Automated object detection and height extraction pipeline"
+      },
+      {
+        "src": "img/projects/aviation-obstacles/ACT-Treetops.png",
+        "alt": "Treetops detected in point cloud",
+        "caption": "Point Cloud with Treetops as 3D points"
       }
+
     ],
     "links": []
+  },
+  {
+    "id": "land-use-classification",
+    "title": "Land Use Classification using Deep Learning Models",
+    "cardTitle": "Land Use Classification\nwith Deep Learning",
+    "tag": "Deep Learning · Remote Sensing",
+    "cardImage": "img/projects/land-use-classification/multilabel_examples.png",
+    "date": "April 2026 – May 2026",
+    "commissioner": "Wageningen University",
+    "skills": ["Deep Learning", "Vision Transformers", "Image Classification", "Python", "PyTorch"],
+    "description": [
+      "For a Deep Learning course during my Master at Wageningen University, I worked with a fellow student to compare a ResNet50 convolutional network with a Vision Transformer (ViT-L, pretrained with DINOv3 on satellite imagery) for land use classification on the UC Merced dataset. We tested both models on single-label and multi-label classification, and looked at the effect of backbone freezing, augmentation, dropout and learning rate.",
+      "ResNet50 reached near-perfect results on the single-label task (test F1 of 0.99), while a partially unfrozen ViT performed best on the more challenging multi-label task (test F1 of 0.93)."
+    ],
+    "images": [
+      {
+        "src": "img/projects/land-use-classification/multilabel_examples.png",
+        "alt": "Four aerial images of harbors, a golf course and a residential area, each with its multi-label land use tags",
+        "caption": "UC Merced images with their multi-label tags"
+      }
+    ],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/sstaheli52/Deep-learning-land-use-classification" }
+    ]
+  },
+  {
+    "id": "elephant-presence",
+    "title": "Elephant Presence Modeling in the Welgevonden Game Reserve",
+    "cardTitle": "Elephant Presence\nModeling",
+    "tag": "Spatial Modeling · R Shiny",
+    "cardImage": "img/projects/elephant-presence/presence_map.png",
+    "date": "September 2025 – November 2025",
+    "commissioner": "Wageningen University, Welgevonden Game Reserve",
+    "skills": ["R", "Spatial Modeling", "Logistic Regression", "R Shiny", "Dashboard Design"],
+    "description": [
+      "During my Master at Wageningen University, I worked with a team of students to model elephant presence in the Welgevonden Game Reserve in South Africa, using GPS tracking data of 10 elephants from 2018-2020. We trained a logistic regression model on environmental covariates such as distance to roads, settlements and water sources, elevation, temperature and time of day.",
+      "The project resulted in an interactive R Shiny dashboard showing kernel density hotspots of elephant activity and a location predictor, where users can adjust the temperature and time of day to see predicted elephant presence across the reserve."
+    ],
+    "images": [
+      {
+        "src": "img/projects/elephant-presence/presence_map.png",
+        "alt": "Heatmap of elephant presence over a satellite image of the Welgevonden Game Reserve with the reserve boundary in blue",
+        "caption": "Elephant presence hotspots in the reserve"
+      }
+    ],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/TomerP2/Elephant-Presence-Modeling" }
+    ]
   },
   {
     "id": "graveyard-mapping",
