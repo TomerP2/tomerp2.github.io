@@ -10,14 +10,16 @@ Little portfolio website for me. Made with the help of Claude Code.
 
 ```
 portfolio/
-  index.html              ← Page markup + project card <template> and project popup <dialog>
+  index.html              ← Page markup + timeline item / project card <template>s and project popup <dialog>
   data/
     projects.json         ← All project info (cards + popups are built from this)
+    timeline.json         ← Experience & Education entries (timeline is built from this)
   css/
     style.css             ← All styles: reset, variables, layout, components, responsive
   js/
     main.js               ← Scroll-reveal (+ global observeReveal helper), active nav link, project drag-scroll
     projects.js           ← Renders project cards from data/projects.json, opens the project popup + carousel
+    timeline.js           ← Renders the Experience timeline from data/timeline.json
     gradient.js           ← Animated background (ESM module — imports @firecms/neat via CDN)
   img/
     image_of_me.jpeg      ← Guitar performance photo (hero + photo strip)
@@ -28,10 +30,14 @@ portfolio/
     Groenlo_project.png        ← Unused (project removed)
     projects/             ← Card + popup images, one folder per project
       master-thesis/      ← Galileo land cover thesis (flowchart, labelled site)
-      aviation-obstacles/ ← Antea aviation obstacles (pipeline flowchart, point cloud GIF ~43 MB)
+      aviation-obstacles/ ← Antea aviation obstacles (treetops card image, pipeline flowchart, point cloud GIF compressed to ~4 MB)
+      land-use-classification/ ← ResNet50 vs ViT land use classification (UC Merced multi-label examples)
+      elephant-presence/  ← Welgevonden elephant presence modeling (presence heatmap)
       graveyard-mapping/  ← Movares graveyard mapping (point cloud, ArcGIS app)
       van-oord/           ← Bachelor thesis point cloud segmentation
       fietsmeister/       ← Fietsmeister web app screenshots
+  files/
+    Tomer_Peled_CV.pdf    ← CV served by the footer "Download CV" link (replace this file to update it)
   .claude/
     launch.json           ← Preview server config (python3 http.server on port 3000)
   CLAUDE.md               ← Instructions for Claude Code
@@ -48,13 +54,18 @@ portfolio/
 | `js/projects.js` | Fetches `data/projects.json`, clones `#project-card-template` per project, and fills/opens the `#project-modal` dialog (info boxes + image carousel). Only fills `[data-field]` elements; empty fields hide their `[data-box]`. Any `.gif` (card or popup image) is fetched and its loop count patched to 0 so it loops forever, regardless of how it was exported. |
 | `data/projects.json` | Array of projects in display order. Fields: `id`, `title`, `cardTitle` (optional, `
 ` = line break), `tag`, `cardImage`, `date`, `commissioner`, `skills[]`, `description[]` (one string per paragraph), `images[]` (`src`, `alt`, `caption`), `links[]` (`label`, `url`). Maps directly to Eleventy `_data/projects.json` later. |
+| `js/timeline.js` | Fetches `data/timeline.json`, clones `#timeline-item-template` per entry into `#timeline`, fills `[data-field]` elements and removes those with an empty value. |
+| `data/timeline.json` | Array of timeline entries in display order (newest first). Fields: `date`, `title`, `org`, `details` (optional extra line, e.g. courses), `badge` (optional pill, e.g. grade/award). Maps directly to Eleventy `_data/timeline.json` later. |
 | `js/gradient.js` | ES module. Initialises the `NeatGradient` canvas background and wires up scroll → `yOffset`. Loaded with `<script type="module">` so it runs independently from `main.js`. |
 
 ---
+
+## Adding / editing a timeline entry
+Add or edit an object in `data/timeline.json`. Order in the file is display order. Leave `details` / `badge` as `""` to hide them. Item markup is the `#timeline-item-template` in `index.html`.
 
 ## Adding / editing a project
 1. Add or edit an entry in `data/projects.json`. Empty strings/arrays are fine — that box is simply hidden in the popup.
 2. Put popup images in `img/projects/<id>/` and list them under `images`. Animated `.gif`s work too (also for `cardImage`) and always loop infinitely.
 3. Popup styling: tweak the `/* Project modal — tweak me */` variables in `:root` in `css/style.css` (sizes, colours, column widths, carousel). Each popup box has its own class (`.pm-title`, `.pm-meta`, `.pm-skills`, `.pm-desc`, `.pm-links`, `.pm-media`).
 
-> Projects are loaded with `fetch()`, so the site must be served over HTTP (e.g. `python3 -m http.server 3000`). Opening `index.html` straight from disk shows no project cards.
+> Projects are loaded with `fetch()`, so the site must be served over HTTP (e.g. `python3 -m http.server 3000`). Opening `index.html` straight from disk shows no project cards or timeline.
