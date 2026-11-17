@@ -22,6 +22,8 @@ portfolio/
     timeline.js           ← Renders the Experience timeline from data/timeline.json
     gradient.js           ← Animated background (ESM module — imports @firecms/neat via CDN)
   img/
+    icons/
+      favicon.png         ← Browser-tab icon ("Signal satellite" by Dighital, Flaticon — credited in the `.credits` line below the footer)
     image_of_me.jpeg      ← Guitar performance photo (hero + photo strip)
     Closeup_me.png        ← Close-up portrait
     van_oord_project.png  ← Old card image (unused, kept for reference)
