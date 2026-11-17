@@ -56,55 +56,8 @@
   <!-- ─── Experience / Timeline ───────────────────────── -->
   <section id="experience" class="section">
     <div class="section-label">Experience &amp; Education</div>
-    <div class="timeline">
-
-      <!-- Add/edit timeline entries here -->
-      <div class="tl-item reveal">
-        <div class="tl-date">Sep 2025 – Present</div>
-        <div class="tl-title">MSc Geo-Information Science</div>
-        <div class="tl-org">Wageningen University &amp; Research</div>
-        <div class="tl-badge">★ Grade avg 8.7</div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-date">Mar 2025 – Apr 2026</div>
-        <div class="tl-title">GIS Specialist</div>
-        <div class="tl-org">Movares</div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-date">Feb 2024 – Jul 2024</div>
-        <div class="tl-title">Thesis: Point Cloud Segmentation</div>
-        <div class="tl-org">Van Oord / HAS University</div>
-        <div class="tl-badge">🏆 2nd Place GIN-NCG Scriptieprijs 2024</div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-date">Jul 2023 – Jan 2024</div>
-        <div class="tl-title">Dashboard Developer</div>
-        <div class="tl-org">BouwRisk</div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-date">Feb 2023 – Jul 2023</div>
-        <div class="tl-title">Internship</div>
-        <div class="tl-org">BouwRisk</div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-date">Sep 2022 – Jan 2023</div>
-        <div class="tl-title">Internship</div>
-        <div class="tl-org">GIS Specialisten</div>
-      </div>
-
-      <div class="tl-item reveal">
-        <div class="tl-date">2020 – 2024</div>
-        <div class="tl-title">BSc Applied Geo-Information Science</div>
-        <div class="tl-org">HAS University of Applied Sciences, Den Bosch</div>
-        <div class="tl-badge">★ Grade avg 8.3</div>
-      </div>
-
-    </div>
+    <!-- Timeline entries are generated from data/timeline.json by js/timeline.js -->
+    <div class="timeline" id="timeline"></div>
   </section>
 
   <!-- ─── Projects ─────────────────────────────────────── -->
@@ -261,10 +214,23 @@
         tomer.a.peled@gmail.com
       </a>
     </div>
-    <button class="cv-btn" onclick="window.open('Tomer_Peled_CV_EN_GIS_Integration_Course.pdf')">
+    <!-- Replace files/Tomer_Peled_CV.pdf to update the CV -->
+    <a class="cv-btn" href="files/Tomer_Peled_CV.pdf" download="Tomer_Peled_CV.pdf">
       Download CV ↓
-    </button>
+    </a>
   </footer>
+
+  <!-- ─── Timeline item template ──────────────────────── -->
+  <!-- Edit timeline item markup here. Elements with an empty value are removed. -->
+  <template id="timeline-item-template">
+    <div class="tl-item reveal">
+      <div class="tl-date" data-field="date"></div>
+      <div class="tl-title" data-field="title"></div>
+      <div class="tl-org" data-field="org"></div>
+      <div class="tl-details" data-field="details"></div>
+      <div class="tl-badge" data-field="badge"></div>
+    </div>
+  </template>
 
   <!-- ─── Project card template ───────────────────────── -->
   <!-- Edit card markup here. js/projects.js fills the [data-field] elements from data/projects.json -->
@@ -336,6 +302,7 @@
 
   <script src="js/main.js"></script>
   <script src="js/projects.js"></script>
+  <script src="js/timeline.js"></script>
   <script type="module" src="js/gradient.js"></script>
 
 </body>
