@@ -29,6 +29,95 @@
     ]
   },
   {
+    "id": "van-oord-point-cloud",
+    "title": "Bachelor Thesis - Point Cloud Semantic Segmentation",
+    "cardTitle": "Point Cloud\nSemantic Segmentation",
+    "tag": "LiDAR · Deep Learning",
+    "cardImage": "img/projects/van-oord/segmentation_result.png",
+    "date": "January 2024 – June 2024",
+    "commissioner": "Van Oord N.V.; HAS University",
+    "skills": ["Point Cloud Processing", "Deep Learning", "Semantic Segmentation"],
+    "description": [
+      "For my Bachelor Thesis at the HAS University of Applied Sciences, I created a point cloud object segmentation pipeline for the Dutch dredging company Van Oord. The pipeline creates a 2D orthomosaic from a point cloud of a dredging site, then uses the YOLO deep learning model for automatic segmentation of non-ground objects (pipes and machinery) in the ortho. Lastly, the pipeline uses the 2D objects for point classification.",
+      "This pipeline significantly sped up the point cloud cleaning process, allowing for quick processing of point clouds of dredging projects, which Van Oord creates regularly."
+    ],
+    "images": [
+      {
+        "src": "img/projects/van-oord/pipeline_flowchart.png",
+        "alt": "Flowchart of the point cloud labelling pipeline",
+        "caption": "Flowchart of the YOLO point cloud labelling script"
+      },
+      {
+        "src": "img/projects/van-oord/segmentation_result.png",
+        "alt": "Aerial view of a construction site next to the same area with pipes and machinery segmented in red",
+        "caption": "Input point cloud (left) and segmented pipes and machinery (right)"
+      },
+      {
+        "src": "img/projects/van-oord/ortho_detections.png",
+        "alt": "Orthomosaic crops with YOLO detections of pipes and an excavator",
+        "caption": "YOLO detections of pipes and machinery in the orthomosaic"
+      }
+    ],
+    "links": []
+  },
+  {
+    "id": "graveyard-mapping",
+    "title": "Creating Infrastructure for Graveyard Mapping",
+    "cardTitle": "Infrastructure for\nGraveyard Mapping",
+    "tag": "GIS · Object Detection",
+    "cardImage": "img/projects/graveyard-mapping/point_cloud_graves.png",
+    "date": "April 2025 – August 2025",
+    "commissioner": "Movares",
+    "skills": ["Object Detection", "360-degree images", "UI design", "ArcGIS Online"],
+    "description": [
+      "During my time at Movares, I was responsible for the creation of GIS infrastructure for the efficient mapping of graveyards. The created products help field workers from Movares and Kybys quickly create a graves dataset for a previously unmapped graveyard, by utilizing 360-degree images and orthomosaics created by NavVis LiDAR scanners.",
+      "The project involved detecting graves from orthomosaics, utilizing OCR on 360-degree images to assign names and dates to graves, and creating an ArcGIS Dashboard for quick human-in-the-loop validation."
+    ],
+    "images": [
+      {
+        "src": "img/projects/graveyard-mapping/point_cloud_graves.png",
+        "alt": "Point cloud of a graveyard next to the same graveyard with detected graves highlighted",
+        "caption": "Graveyard point cloud (left) and detected graves (right)"
+      },
+      {
+        "src": "img/projects/graveyard-mapping/arcgis_dashboard.png",
+        "alt": "ArcGIS web app showing grave polygons over an orthophoto with a photo popup of a selected grave",
+        "caption": "ArcGIS app for human-in-the-loop validation"
+      }
+    ],
+    "links": [
+      { "label": "Esri Connect presentation", "url": "https://www.esri.nl/content/dam/distributor-restricted/esri-nl/evenementen/esri-connect/2026/videos-en-presentaties/extern/rest-in-gis-graven-in-kaart-brengen.pdf" }
+    ]
+  },
+  {
+    "id": "fietsmeister",
+    "title": "Fietsmeister - Website for cyclists to monitor road blockages",
+    "cardTitle": "Fietsmeister",
+    "tag": "Web · Python · Flask",
+    "cardImage": "img/fietsmeister_project.png",
+    "date": "November 2023 – March 2024",
+    "commissioner": "HAS University; Philip Lobatto",
+    "skills": ["Web Development", "Python", "Flask"],
+    "description": [
+      "During my Bachelor, I developed a web app called 'Fietsmeister'. This app was created to enable cyclists in the Netherlands to report road blockages, and plan their routes around these blockages in advance. The project resulted in a fully working front-end and back-end for road blockage monitoring."
+    ],
+    "images": [
+      {
+        "src": "img/projects/fietsmeister/map_blockages.png",
+        "alt": "Mobile map view with reported road blockages marked as orange icons",
+        "caption": "Reported blockages on the map"
+      },
+      {
+        "src": "img/projects/fietsmeister/blockage_popup.png",
+        "alt": "Mobile map view with a blockage details panel where users can confirm or dispute the report",
+        "caption": "Users can confirm or dispute a reported blockage"
+      }
+    ],
+    "links": [
+      { "label": "GitHub", "url": "https://github.com/TomerP2/Fietsmeister" }
+    ]
+  },
+  {
     "id": "aviation-obstacles",
     "title": "Detecting Potential Aviation Obstacles using AHN",
     "cardTitle": "Detecting Aviation\nObstacles using AHN",
@@ -106,95 +195,6 @@
     ],
     "links": [
       { "label": "GitHub", "url": "https://github.com/TomerP2/Elephant-Presence-Modeling" }
-    ]
-  },
-  {
-    "id": "graveyard-mapping",
-    "title": "Creating Infrastructure for Graveyard Mapping",
-    "cardTitle": "Infrastructure for\nGraveyard Mapping",
-    "tag": "GIS · Object Detection",
-    "cardImage": "img/projects/graveyard-mapping/point_cloud_graves.png",
-    "date": "April 2025 – August 2025",
-    "commissioner": "Movares",
-    "skills": ["Object Detection", "360-degree images", "UI design", "ArcGIS Online"],
-    "description": [
-      "During my time at Movares, I was responsible for the creation of GIS infrastructure for the efficient mapping of graveyards. The created products help field workers from Movares and Kybys quickly create a graves dataset for a previously unmapped graveyard, by utilizing 360-degree images and orthomosaics created by NavVis LiDAR scanners.",
-      "The project involved detecting graves from orthomosaics, utilizing OCR on 360-degree images to assign names and dates to graves, and creating an ArcGIS Dashboard for quick human-in-the-loop validation."
-    ],
-    "images": [
-      {
-        "src": "img/projects/graveyard-mapping/point_cloud_graves.png",
-        "alt": "Point cloud of a graveyard next to the same graveyard with detected graves highlighted",
-        "caption": "Graveyard point cloud (left) and detected graves (right)"
-      },
-      {
-        "src": "img/projects/graveyard-mapping/arcgis_dashboard.png",
-        "alt": "ArcGIS web app showing grave polygons over an orthophoto with a photo popup of a selected grave",
-        "caption": "ArcGIS app for human-in-the-loop validation"
-      }
-    ],
-    "links": [
-      { "label": "Esri Connect presentation", "url": "https://www.esri.nl/content/dam/distributor-restricted/esri-nl/evenementen/esri-connect/2026/videos-en-presentaties/extern/rest-in-gis-graven-in-kaart-brengen.pdf" }
-    ]
-  },
-  {
-    "id": "van-oord-point-cloud",
-    "title": "Bachelor Thesis - Point Cloud Semantic Segmentation",
-    "cardTitle": "Point Cloud\nSemantic Segmentation",
-    "tag": "LiDAR · Deep Learning",
-    "cardImage": "img/projects/van-oord/segmentation_result.png",
-    "date": "January 2024 – June 2024",
-    "commissioner": "Van Oord N.V.",
-    "skills": ["Point Cloud Processing", "Deep Learning", "Semantic Segmentation"],
-    "description": [
-      "For my Bachelor Thesis at the HAS University of Applied Sciences, I created a point cloud object segmentation pipeline for the Dutch dredging company Van Oord. The pipeline creates a 2D orthomosaic from a point cloud of a dredging site, then uses the YOLO deep learning model for automatic segmentation of non-ground objects (pipes and machinery) in the ortho. Lastly, the pipeline uses the 2D objects for point classification.",
-      "This pipeline significantly sped up the point cloud cleaning process, allowing for quick processing of point clouds of dredging projects, which Van Oord creates regularly."
-    ],
-    "images": [
-      {
-        "src": "img/projects/van-oord/pipeline_flowchart.png",
-        "alt": "Flowchart of the point cloud labelling pipeline",
-        "caption": "Flowchart of the YOLO point cloud labelling script"
-      },
-      {
-        "src": "img/projects/van-oord/segmentation_result.png",
-        "alt": "Aerial view of a construction site next to the same area with pipes and machinery segmented in red",
-        "caption": "Input point cloud (left) and segmented pipes and machinery (right)"
-      },
-      {
-        "src": "img/projects/van-oord/ortho_detections.png",
-        "alt": "Orthomosaic crops with YOLO detections of pipes and an excavator",
-        "caption": "YOLO detections of pipes and machinery in the orthomosaic"
-      }
-    ],
-    "links": []
-  },
-  {
-    "id": "fietsmeister",
-    "title": "Fietsmeister - Website for cyclists to monitor road blockages",
-    "cardTitle": "Fietsmeister",
-    "tag": "Web · Python · Flask",
-    "cardImage": "img/fietsmeister_project.png",
-    "date": "November 2023 – March 2024",
-    "commissioner": "HAS University of Applied Sciences; Philip Lobatto",
-    "skills": ["Web Development", "Python", "Flask"],
-    "description": [
-      "During my Bachelor, I developed a web app called 'Fietsmeister'. This app was created to enable cyclists in the Netherlands to report road blockages, and plan their routes around these blockages in advance. The project resulted in a fully working front-end and back-end for road blockage monitoring."
-    ],
-    "images": [
-      {
-        "src": "img/projects/fietsmeister/map_blockages.png",
-        "alt": "Mobile map view with reported road blockages marked as orange icons",
-        "caption": "Reported blockages on the map"
-      },
-      {
-        "src": "img/projects/fietsmeister/blockage_popup.png",
-        "alt": "Mobile map view with a blockage details panel where users can confirm or dispute the report",
-        "caption": "Users can confirm or dispute a reported blockage"
-      }
-    ],
-    "links": [
-      { "label": "GitHub", "url": "https://github.com/TomerP2/Fietsmeister" }
     ]
   }
 ]
