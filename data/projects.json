@@ -127,7 +127,7 @@
     "commissioner": "Antea Group, Wageningen University",
     "skills": ["Point Cloud Processing", "Object Detection"],
     "description": [
-      "During my Master, I worked with a team of students for Antea Group. Our task was to create a pipeline for automatic detection of the apex points of trees and buildings, using a combination of open source datasets including AHN and BAG. This pipeline successfully makes the detection of potential aviation obstacles around airports more robust and faster."
+      "During my Master, I worked as team manager with a team of students for Antea Group. Our task was to create a pipeline for automatic detection of the apex points of trees and buildings, using a combination of open source datasets including AHN and BAG. This pipeline successfully makes the detection of potential aviation obstacles around airports more robust and faster."
     ],
     "images": [
       {
